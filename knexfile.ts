@@ -10,13 +10,14 @@ const config: { [key: string]: Knex.Config } = {
       database: process.env.DB_NAME,
       user: process.env.DB_USER,
       password: process.env.DB_PASSWORD,
+      host: 'host.docker.internal',
     },
     migrations: {
       tableName: 'knex_migrations',
-      directory: 'src/knex/migrations',
+      directory: 'infra/db/knex/migrations',
     },
     seeds: {
-      directory: 'src/knex/seeds',
+      directory: 'infra/db/knex/seeds',
     },
   },
 };
