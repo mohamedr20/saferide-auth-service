@@ -1,4 +1,4 @@
-interface User {
+export default interface User {
   email: string;
   passwordHash: string;
   username?: string;
