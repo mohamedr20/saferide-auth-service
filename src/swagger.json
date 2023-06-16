@@ -2,7 +2,7 @@
   "openapi": "3.0.3",
   "info": {
     "title": "SafeRide TakeHome Excercise API - OpenAPI 3.0",
-    "description": "Some useful links:\n- [The SafeRide Auth Service repository](https://github.com/mohamedr20/saferide-auth-service)\n- [The source API definition for the Auth Service](https://github.com/swagger-api/swagger-petstore/blob/master/src/main/resources/openapi.yaml)",
+    "description": "Some useful links:\n- [The SafeRide Auth Service repository](https://github.com/mohamedr20/saferide-auth-service)\n- [The source API definition for the Auth Service](https://github.com/mohamedr20/saferide-auth-service/blob/main/src/swagger.json)",
     "termsOfService": "http://swagger.io/terms/",
     "contact": {
       "email": "mohamedr201@gmail.com"
