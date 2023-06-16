@@ -1,0 +1,28 @@
+{
+  "name": "saferide-auth-service",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start:dev": "npx nodemon",
+    "build": "rimraf ./build && tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mohamedr20/saferide-auth-service.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mohamedr20/saferide-auth-service/issues"
+  },
+  "homepage": "https://github.com/mohamedr20/saferide-auth-service#readme",
+  "devDependencies": {
+    "@types/node": "^20.1.7",
+    "nodemon": "^2.0.22",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.0.4"
+  }
+}
