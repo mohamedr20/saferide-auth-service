@@ -12,26 +12,9 @@ class UserController {
   }
 
   initalizeRoutes(): void {
-    this.router.post(`${this.path}`, this.createUser);
     this.router.get(`${this.path}/:id`, this.findUser);
+    this.router.get(`${this.path}`, this.findUsers);
   }
-
-  private createUser = async (
-    req: Request,
-    res: Response,
-    next: NextFunction
-  ): Promise<Response> => {
-    try {
-      const { ...userInput } = req.body;
-
-      const createUserResult = await this.userService.createUser(userInput);
-      return res.json({ data: createUserResult }).status(200);
-    } catch (err) {
-      console.error(err);
-      next(err);
-      throw err;
-    }
-  };
 
   private findUser = async (
     req: Request,
@@ -43,6 +26,21 @@ class UserController {
       const user = await this.userService.findUser(id);
 
       return res.json({ data: user }).status(200);
+    } catch (err) {
+      console.error(err);
+      next(err);
+      throw err;
+    }
+  };
+
+  private findUsers = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<Response> => {
+    try {
+      const users = await this.userService.findUsers();
+      return res.json({ data: users }).status(200);
     } catch (err) {
       console.error(err);
       next(err);
