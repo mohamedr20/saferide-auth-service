@@ -1,16 +1,5 @@
 version: '3.8'
 services:
-  api:
-    container_name: api
-    restart: always
-    build: .
-    ports:
-      - ${PORT}:${PORT}
-    depends_on:
-      - db
-    volumes:
-    - .:/usr/src/app
-
   db:
     container_name: postgres
     image: postgres
@@ -22,13 +11,25 @@ services:
       - POSTGRES_PASSWORD=${DB_PASSWORD}
       - POSTGRES_DB=${DB_NAME}
 
+  api:
+    container_name: api
+    restart: always
+    build: .
+    ports:
+      - ${PORT}:${PORT}
+    depends_on:
+      - db
+    volumes:
+    - .:/usr/src/app
+
   pg-admin:
     image: dpage/pgadmin4:6
     environment:
       - PGADMIN_DEFAULT_EMAIL=admin@email.com
       - PGADMIN_DEFAULT_PASSWORD=admin
       - PGADMIN_LISTEN_PORT=5050
-
+    logging:
+      driver: none
     ports:
       - "5050:5050"
 

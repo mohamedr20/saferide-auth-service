@@ -3,6 +3,10 @@ import * as dotenv from 'dotenv';
 
 dotenv.config();
 
+/**
+ * @type {Object<string, import("knex").Knex.Config>}
+*/
+
 const config: { [key: string]: Knex.Config } = {
   development: {
     client: 'pg',
@@ -15,9 +19,11 @@ const config: { [key: string]: Knex.Config } = {
     migrations: {
       tableName: 'knex_migrations',
       directory: 'infra/db/knex/migrations',
+      extension: 'ts'
     },
     seeds: {
       directory: 'infra/db/knex/seeds',
+      extension: 'ts'
     },
   },
 };

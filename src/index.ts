@@ -1,6 +1,7 @@
-import express, { Application, NextFunction, Router } from 'express';
+import express, { Application, Router } from 'express';
 import swaggerUI from 'swagger-ui-express';
 import swaggerDocument from './swagger.json';
+import logHandler from './middleware/logging';
 
 interface Controller {
   path: string;
@@ -13,8 +14,9 @@ class App {
   constructor(controllers: Controller[]) {
     this.app = express();
     this.app.use(express.json());
+    this.app.use(logHandler)
     this.app.use(
-      '/api-docs',
+      '/api/docs',
       swaggerUI.serve,
       swaggerUI.setup(swaggerDocument)
     );

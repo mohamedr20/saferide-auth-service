@@ -1,14 +1,16 @@
-import User from './user';
+import User from './user.model';
 import dotenv from 'dotenv';
 import UserRepository from './user.repo';
+import knex from 'knex'
+import dbConfig from '../../knexfile'
 
 dotenv.config();
 
 class UserService {
   private userRepository: UserRepository;
-
-  constructor(userRepository: UserRepository) {
-    this.userRepository = userRepository;
+  
+  constructor() {
+    this.userRepository = new UserRepository(knex(dbConfig["development"]), 'user')
   }
 
   public async findUser(id: string) {
@@ -23,9 +25,10 @@ class UserService {
     }
   }
 
-  async findUserByEmail(email: string): Promise<User> {
+  async findUserByEmail(email: string) {
     try {
       console.log(`Inside userService.findByEmail... email:${email}`);
+
       const user = await this.userRepository.findUserByEmail(email);
       return user;
     } catch (err) {
@@ -40,10 +43,9 @@ class UserService {
       const users = await this.userRepository.find([
         'username',
         'email',
-        'firstName',
-        'lastName',
         'phone',
       ]);
+
       return users;
     } catch (err) {
       console.error(err);

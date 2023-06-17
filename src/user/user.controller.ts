@@ -6,14 +6,14 @@ class UserController {
   public router = Router();
   private userService: UserService;
 
-  constructor(userService: UserService) {
-    this.userService = userService;
+  constructor() {
+    this.userService = new UserService()
     this.initalizeRoutes();
   }
 
   initalizeRoutes(): void {
+    this.router.get(`${this.path}`, this.findUsers)
     this.router.get(`${this.path}/:id`, this.findUser);
-    this.router.get(`${this.path}`, this.findUsers);
   }
 
   private findUser = async (
