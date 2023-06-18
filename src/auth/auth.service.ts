@@ -19,7 +19,7 @@ class AuthService {
         throw new UserNotFoundException(email);
       }
 
-      const isValidPassword = await bcrypt.compare(password, user.passwordHash);
+      const isValidPassword = await bcrypt.compare(password, user.password);
       if (!isValidPassword) throw new InvalidCredentialsException();
 
       const token = await this.createToken(user.id);

@@ -1,4 +1,4 @@
-import User from './user.model';
+import {User, mapUserToDB} from './user.model';
 import dotenv from 'dotenv';
 import UserRepository from './user.repo';
 import knex from 'knex'
@@ -10,7 +10,7 @@ class UserService {
   private userRepository: UserRepository;
   
   constructor() {
-    this.userRepository = new UserRepository(knex(dbConfig["development"]), 'user')
+    this.userRepository = new UserRepository(knex(dbConfig[process.env.NODE_ENV as string]), 'user')
   }
 
   public async findUser(id: string) {
@@ -53,16 +53,11 @@ class UserService {
     }
   }
 
-  public async createUser(userInput: Partial<User>) {
-    try {
+  public async registerUser(registerBody: User) {
       console.log('Inside userService.createUser');
-
+      const userInput = mapUserToDB(registerBody)
       const createUserResult = await this.userRepository.insert(userInput);
       return createUserResult;
-    } catch (err) {
-      console.error(err);
-      throw err;
-    }
   }
 }
 
