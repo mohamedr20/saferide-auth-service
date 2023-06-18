@@ -1,6 +1,8 @@
 import { NextFunction, Request, Response, Router } from 'express';
 import UserService from './user.service';
-import {mapUserToDB, User} from './user.model';
+import { User } from './user.model';
+import validationMiddleware from '../middleware/validation';
+import registerSchema from '../validations/register.validation';
 
 class UserController {
   public path = '/user';
@@ -8,14 +10,18 @@ class UserController {
   private userService: UserService;
 
   constructor() {
-    this.userService = new UserService()
+    this.userService = new UserService();
     this.initalizeRoutes();
   }
 
   initalizeRoutes(): void {
-    this.router.get(`${this.path}`, this.findUsers)
+    this.router.get(`${this.path}`, this.findUsers);
     this.router.get(`${this.path}/:id`, this.findUser);
-    this.router.post(`${this.path}`, this.createUser);
+    this.router.post(
+      `${this.path}`,
+      validationMiddleware(registerSchema),
+      this.createUser
+    );
   }
 
   private findUser = async (
@@ -33,11 +39,7 @@ class UserController {
     }
   };
 
-  findUsers = async (
-    req: Request,
-    res: Response,
-    next: NextFunction
-  ) => {
+  findUsers = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const users: User[] = await this.userService.findUsers();
       return res.json({ data: users }).status(200);
@@ -46,11 +48,7 @@ class UserController {
     }
   };
 
-  createUser = async (
-    req: Request,
-    res: Response,
-    next: NextFunction
-  ) => {
+  createUser = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const createUserResponse = await this.userService.registerUser(req.body);
 
