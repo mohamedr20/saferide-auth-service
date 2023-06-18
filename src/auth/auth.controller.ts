@@ -21,22 +21,20 @@ class AuthController {
     );
   }
 
-  async login(req: Request, res: Response, next: NextFunction){
+  login = async (req: Request, res: Response, next: NextFunction) => {
     try {
-      //middleware will check
       const { email, password } = req.body;
-
       const accessToken = await this.authService.verifyLogin(email, password);
+      
       return res.json({ data: accessToken });
     } catch (err) {
       next(err);
-      res.json(err);
     }
   };
 
-  async register(req: Request, res: Response, next: NextFunction){
+  register = async (req: Request, res: Response, next: NextFunction) => {
 
-  }
+  };
 }
 
 export default AuthController;

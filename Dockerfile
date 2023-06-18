@@ -13,6 +13,5 @@ COPY ./src ./src
 
 # Installs all packages
 RUN npm install
-
 # Runs the dev npm script to build & start the server
 CMD npm run start:dev

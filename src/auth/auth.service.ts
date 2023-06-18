@@ -1,6 +1,6 @@
 import UserService from '../user/user.service';
 import jwt from 'jsonwebtoken';
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 import UserNotFoundException from '../exceptions/UserNotFoundException';
 import InvalidCredentialsException from '../exceptions/InvalidCredentialsException';
 import * as dotenv from 'dotenv';
@@ -14,7 +14,6 @@ class AuthService {
   }
 
   public async verifyLogin(email: string, password: string) {
-    try {
       const user = await this.userService.findUserByEmail(email);
       if (!user) {
         throw new UserNotFoundException(email);
@@ -25,9 +24,6 @@ class AuthService {
 
       const token = await this.createToken(user.id);
       return token;
-    } catch (err) {
-      return err;
-    }
   }
 
   private async createToken(userId: string) {
