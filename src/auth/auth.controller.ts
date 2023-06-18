@@ -25,7 +25,7 @@ class AuthController {
     try {
       const { email, password } = req.body;
       const accessToken = await this.authService.verifyLogin(email, password);
-      
+
       return res.json({ data: accessToken });
     } catch (err) {
       next(err);
@@ -33,7 +33,7 @@ class AuthController {
   };
 
   register = async (req: Request, res: Response, next: NextFunction) => {
-
+    
   };
 }
 

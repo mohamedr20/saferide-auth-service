@@ -1,16 +1,22 @@
-import {User, mapUserToDB} from './user.model';
-import dotenv from 'dotenv';
+import { User, mapUserToDB } from './user.model';
 import UserRepository from './user.repo';
-import knex from 'knex'
-import dbConfig from '../../knexfile'
+import AuthService from '../auth/auth.service';
+import knex from 'knex';
+import dbConfig from '../../knexfile';
+import ExsistingUserException from '../exceptions/ExsistingUserException';
+import bcrypt from 'bcryptjs';
+import dotenv from 'dotenv';
 
 dotenv.config();
 
 class UserService {
   private userRepository: UserRepository;
-  
+
   constructor() {
-    this.userRepository = new UserRepository(knex(dbConfig[process.env.NODE_ENV as string]), 'user')
+    this.userRepository = new UserRepository(
+      knex(dbConfig['development']),
+      'user'
+    );
   }
 
   public async findUser(id: string) {
@@ -54,10 +60,21 @@ class UserService {
   }
 
   public async registerUser(registerBody: User) {
-      console.log('Inside userService.createUser');
-      const userInput = mapUserToDB(registerBody)
-      const createUserResult = await this.userRepository.insert(userInput);
-      return createUserResult;
+    console.log('Inside userService.createUser');
+
+    const userInput = mapUserToDB(registerBody);
+    const exsistingUser = await this.userRepository.findUserByEmail(
+      userInput.email
+    );
+
+    if (exsistingUser) {
+      throw new ExsistingUserException('A user already exsists for this email');
+    }
+
+    userInput.password = bcrypt.hashSync(userInput.password);
+
+    const createUserResult = await this.userRepository.insert(userInput);
+    return createUserResult;
   }
 }
 

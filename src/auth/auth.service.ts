@@ -26,6 +26,11 @@ class AuthService {
       return token;
   }
 
+  public async hashPassword(password: string){
+    const hashedPassword = await bcrypt.hash(password, process.env.HASH_ROUNDS as string);
+    return hashedPassword;
+  }
+
   private async createToken(userId: string) {
     const token = await jwt.sign({ userId }, process.env.JWT_SECRET as string, {
       expiresIn: process.env.JWT_EXPIRES_IN,
