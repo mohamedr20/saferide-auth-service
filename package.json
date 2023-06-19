@@ -12,10 +12,10 @@
     "start:db": "npm run rollback && npm run migrate && npm run seed",
     "start:prod": "npm run build && node build/index.js",
     "build": "rimraf ./build && tsc",
-    "migrate": "knex migrate:latest --knexfile=knexfile.ts",
-    "migrate:make": "knex migrate:make --knexfile=ts",
-    "rollback": "knex migrate:rollback --knexfile=knexfile.ts",
-    "seed": "knex seed:run --knexfile=knexfile.ts --verbose"
+    "migrate": "npx knex migrate:latest --knexfile=knexfile.ts",
+    "migrate:make": "npx knex migrate:make --knexfile=ts",
+    "rollback": "npx knex migrate:rollback --knexfile=knexfile.ts",
+    "seed": "npx knex seed:run --knexfile=knexfile.ts --verbose"
   },
   "keywords": [],
   "author": "",
