@@ -1,5 +1,5 @@
 import { Knex } from 'knex';
-import KnexRepository from '../repo';
+import KnexRepository from '../../repo';
 import {User} from './user.model';
 
 class UserRepository extends KnexRepository<User> {

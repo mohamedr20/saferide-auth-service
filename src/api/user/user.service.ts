@@ -2,11 +2,11 @@ import { User, mapUserToDB } from './user.model';
 import UserRepository from './user.repo';
 import AuthService from '../auth/auth.service';
 import knex from 'knex';
-import dbConfig from '../../knexfile';
-import ExsistingUserException from '../exceptions/ExsistingUserException';
+import dbConfig from '../../../knexfile';
+import ExsistingUserException from '../../exceptions/ExsistingUserException';
 import bcrypt from 'bcryptjs';
 import dotenv from 'dotenv';
-import UserNotFoundException from '../exceptions/UserNotFoundException';
+import UserNotFoundException from '../../exceptions/UserNotFoundException';
 
 dotenv.config();
 

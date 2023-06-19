@@ -1,8 +1,8 @@
 import { NextFunction, Request, Response, Router } from 'express';
 import UserService from './user.service';
 import { User } from './user.model';
-import validationMiddleware from '../middleware/validation';
-import registerSchema from '../validations/register.validation';
+import validationMiddleware from '../../middleware/validation';
+import registerSchema from '../../validations/register.validation';
 
 class UserController {
   public path = '/user';

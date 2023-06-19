@@ -1,8 +1,8 @@
 import UserService from '../user/user.service';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
-import UserNotFoundException from '../exceptions/UserNotFoundException';
-import InvalidCredentialsException from '../exceptions/InvalidCredentialsException';
+import UserNotFoundException from '../../exceptions/UserNotFoundException';
+import InvalidCredentialsException from '../../exceptions/InvalidCredentialsException';
 import * as dotenv from 'dotenv';
 dotenv.config();
 

@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response, Router } from 'express';
-import validationMiddleware from '../middleware/validation';
-import loginSchema from '../validations/login.validation';
+import validationMiddleware from '../../middleware/validation';
+import loginSchema from '../../validations/login.validation';
 import AuthService from './auth.service';
 
 class AuthController {

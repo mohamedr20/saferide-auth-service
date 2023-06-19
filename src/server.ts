@@ -1,7 +1,7 @@
 import App from './index';
-import HealthController from './health/health.controller';
-import UserController from './user/user.controller';
-import AuthController from './auth/auth.controller';
+import HealthController from './api/health/health.controller';
+import UserController from './api/user/user.controller';
+import AuthController from './api/auth/auth.controller';
 
 const port = process.env.PORT || '8000';
 
