@@ -6,6 +6,7 @@ import dbConfig from '../../knexfile';
 import ExsistingUserException from '../exceptions/ExsistingUserException';
 import bcrypt from 'bcryptjs';
 import dotenv from 'dotenv';
+import UserNotFoundException from '../exceptions/UserNotFoundException';
 
 dotenv.config();
 
@@ -36,6 +37,7 @@ class UserService {
       console.log(`Inside userService.findByEmail... email:${email}`);
 
       const user = await this.userRepository.findUserByEmail(email);
+      if(!user) throw new UserNotFoundException(email)
       return user;
     } catch (err) {
       throw err;

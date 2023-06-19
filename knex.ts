@@ -6,4 +6,4 @@ dotenv.config();
 const enviroment = process.env.ENVIROMENT || 'development';
 const dbConfig = knexConfig[enviroment];
 
-export default knex(dbConfig);
+export default dbConfig;
