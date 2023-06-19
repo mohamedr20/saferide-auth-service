@@ -2,6 +2,7 @@ import { NextFunction, Request, Response, Router } from 'express';
 import UserService from './user.service';
 import { User } from './user.model';
 import validationMiddleware from '../../middleware/validation';
+import authMiddleware from '../../middleware/auth';
 import registerSchema from '../../validations/register.validation';
 
 class UserController {
@@ -15,8 +16,8 @@ class UserController {
   }
 
   initalizeRoutes(): void {
-    this.router.get(`${this.path}`, this.findUsers);
-    this.router.get(`${this.path}/:id`, this.findUser);
+    this.router.get(`${this.path}`, authMiddleware, this.findUsers);
+    this.router.get(`${this.path}/:id`, authMiddleware, this.findUser);
     this.router.post(
       `${this.path}`,
       validationMiddleware(registerSchema),
