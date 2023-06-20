@@ -21,7 +21,7 @@
   "tags": [
     {
       "name": "auth",
-      "description": "Operations about authorization"
+      "description": "Operations about auth"
     },
     {
       "name": "user",
