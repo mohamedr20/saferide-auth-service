@@ -1,14 +1,58 @@
 # Saferide-Auth-Service
 
 # Table of Contents
+1. [Cloud Architecture](#CloudArchitecture)
+2. [Project Description](#ProjectDescription)
+3. [Prerequisites](#Prerequisites)
+4. [Installation](#Installation)
+5. [Configuration](#Configuration)
+6. [Usage](#Usage)
+7. [Database Schema](#Database)
+8. [API Documentation](#APIDocumentation)
 
-1. [Project Description](#ProjectDescription)
-2. [Prerequisites](#Prerequisites)
-3. [Installation](#Installation)
-4. [Configuration](#Configuration)
-5. [Usage](#Usage)
-6. [Database Schema](#Database)
-7. [API Documentation](#APIDocumentation)
+## Cloud Architecture <a name="CloudArchitecture"></a>
+This application is running on an EC2 instance and managed by Docker Compose. The application consists of three services:
+
+* PostgreSQL: The database service running the PostgreSQL image.
+* API: The main application service defined in the Dockerfile specified by the build context.
+* pgAdmin: The pgAdmin service for managing the PostgreSQL database.
+
+                          +-----------------+
+                          |    EC2 Instance |
+                          |                 |
+                          +-----------------+
+                                   |
+                                   | Runs Docker Compose
+                                   |
+                                   v
+                      +---------------------+
+                      |   PostgreSQL DB     |
+                      |    (postgres)       |
+                      +---------------------+
+                                   |
+                                   | Exposes port 5432
+                                   |
+                                   v
+                      +---------------------+
+                      |      API Service    |
+                      |                     |
+                      +---------------------+
+                                   |
+                                   | Exposes port ${PORT}
+                                   |
+                                   v
+                      +---------------------+
+                      |    pgAdmin Service  |
+                      |  (dpage/pgadmin4:6) |
+                      +---------------------+
+                                   |
+                                   | Exposes port 5050
+                                   |
+                                   v
+                      +---------------------+
+                      |     Docker Volumes  |
+                      |        (data)       |
+                      +---------------------+
 
 ## Project Description <a name="ProjectDescription"></a>
 
@@ -110,8 +154,6 @@ User Table
 
 The API documentation for the SafeRide Auth Service can be found at **localhost:YOUR_SERVER_PORT/api/docs**.
 When visitng the API inside the EC2 instance, the url will be **ec2-52-91-210-105.compute-1.amazonaws.com:3000/api/docs**
-
-
 
 It provides details about:
 
