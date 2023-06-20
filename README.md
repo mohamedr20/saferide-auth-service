@@ -109,6 +109,9 @@ User Table
 ## API Documentation
 
 The API documentation for the SafeRide Auth Service can be found at **localhost:YOUR_SERVER_PORT/api/docs**.
+When visitng the API inside the EC2 instance, the url will be **ec2-52-91-210-105.compute-1.amazonaws.com:3000/api/docs**
+
+
 
 It provides details about:
 
