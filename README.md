@@ -129,7 +129,7 @@ docker-compose build
 After we have built the docker containers we can then run to get the containers up and running:
 
 ```
-docker-compose up -d
+docker-compose up
 ```
 
 You should now have the postgres, node and pg-admin servers all running together!
