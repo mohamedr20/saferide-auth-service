@@ -193,7 +193,7 @@
           },
           "phone": {
             "type": "string",
-            "example": "12345"
+            "example": "200-600-1234"
           }
         }
       },
