@@ -4,11 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "npx mocha test/*.ts",
     "start:dev": "npm run start:db && npx nodemon",
-    "docker:build": "docker-compose up -d --build",
-    "docker:up": "docker-compose up",
-    "docker:down": "docker-compose down",
     "start:db": "npm run rollback && npm run migrate && npm run seed",
     "start:prod": "npm run build && node build/index.js",
     "build": "rimraf ./build && tsc",
